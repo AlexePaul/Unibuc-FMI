@@ -1,0 +1,40 @@
+name: EAS Build
+on: 
+  push:
+    branches:
+      - main
+      - ci-cd-build
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: CI/CD Pipeline w/Dependencies + testing
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 18.x
+
+      - name: Setup Expo and EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Install dependencies
+        run: | 
+          cd iQuit
+          npm install
+
+      - name: Run functionality testing
+        run: |
+          cd iQuit
+          npm test
+
+      - name: Build on EAS
+        run: | 
+          cd iQuit
+          eas build --platform android --non-interactive --no-wait

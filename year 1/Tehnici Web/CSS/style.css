@@ -1,0 +1,195 @@
+body{
+	margin: 0;
+	--menu-border-size: 1px;
+	--nav-Text-size: 15px;
+	counter-reset: section;
+}
+
+footer{
+	background: #471529;
+	margin-top: 200px;
+	padding-top: 20px;
+	padding-bottom: 50px;
+	text-align: center;
+
+}
+
+section.country{
+	margin: 15px;
+	padding-right: 100px;
+}
+
+figure{
+	margin:  0;
+}
+
+figure picture img{
+	width: 100%;
+}
+
+h1.title{
+	color: white; 
+	margin-left: 50px;
+	animation : titleanim 5s linear infinite;
+}
+
+@keyframes titleanim{
+	0%{
+		color: rgb(255, 0, 0);
+	}
+	33%{
+		color: rgb(0,255,0);
+	}
+	66%{
+		color: rgb(0,0,255);
+	}
+	100%{
+		color: rgb(255,0,0);
+	}
+}
+
+.container{
+display: grid;
+width: 95%;
+margin: auto;
+grid-template-areas: 
+"z-usa z-germany"
+"z-japan z-japan";
+grid-template-columns: 1fr 1fr;
+}
+
+.container>section>h2::before{
+	counter-increment: section;
+	content: counter(section)". ";
+}
+
+ul.menu{
+	display: flex;
+}
+nav ul{
+	padding: 0px;
+	margin: 0px;
+}
+ul.menu ul{
+	position:  relative;
+	right: var(--menu-border-size);
+}
+
+#usa{
+	grid-area: z-usa;
+}
+#japan{
+	grid-area: z-japan;
+}
+#Germany{
+	grid-area: z-germany;
+}
+nav{
+	padding: 10px;
+	margin: auto;
+	display: block;
+	width: 95%;
+	font-size: var(--nav-Text-size);
+}
+ul.menu li{
+	display: flex;
+	flex-direction: column;
+	border: var(--menu-border-size) solid #334A23;
+	height: 30px;
+	background:  #8FABE8;
+	width: 100%;
+	text-align: center;
+	line-height: 30px;
+	font-size: var(--nav-Text-size);
+	overflow: hidden;
+	transition: background 0.2s, font-size 0.2s ease-in;
+}
+ul.menu li:hover{
+	overflow: visible;
+}
+ul.menu ul li a{
+	background: #D9ABE8;
+}
+
+ul.menu li a{
+	display: block;
+	width: 100%;
+	height: 100%;
+  	color:  black;
+  	text-decoration: none;
+  	transition: background 0.2s, font-size 0.2s ease-in;
+}
+ul.menu ul li a:hover{
+	background: #D97CE8;
+	transition: all 0.2s ease-in;
+}
+
+ul.menu li:hover{
+	font-size: 1.1em;
+	background: #3EABE8;
+	transition: all 0.2s ease-in;
+}
+
+#chk-menu{
+	display: none;
+}
+
+#labelCheckbox{
+		display: none;
+}
+
+#centerDiv{
+	text-align: center;
+}
+
+#formInregistrare{
+	margin: auto;
+	color: white;
+	width: 50vw;
+}
+
+
+@media screen and (max-width: 750px){
+
+	iframe{
+		width: 100%;
+	}
+
+	ul.menu{
+		display: none;
+	}
+
+	ul.menu li{
+		width: 100%;
+	}
+
+	#labelCheckbox{
+		display: inline;
+	}
+
+	#chk-menu:checked~ul.menu{
+		display: block;
+	}
+
+	#chk-menu{
+	display: inline-block;
+	}
+
+	.container{
+	grid-template-areas: 
+	"z-usa" 
+	"z-germany"
+	"z-japan";
+	grid-template-columns: 1fr;
+	}
+}
+
+@media screen and (max-width:  1500px){
+	.container{
+	grid-template-areas: 
+	"z-usa" 
+	"z-germany"
+	"z-japan";
+	grid-template-columns: 1fr;
+	}
+}
